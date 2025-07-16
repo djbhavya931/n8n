@@ -96,7 +96,7 @@ const isInputPaneActive = ref(false);
 const isOutputPaneActive = ref(false);
 const isPairedItemHoveringEnabled = ref(true);
 
-//computed
+// computed
 
 const pushRef = computed(() => ndvStore.pushRef);
 
@@ -276,7 +276,7 @@ const maxInputRun = computed(() => {
 		node = activeNode.value;
 	}
 
-	if (!node || !runData || !runData.hasOwnProperty(node.name)) {
+	if (!node || !runData?.hasOwnProperty(node.name)) {
 		return 0;
 	}
 
@@ -783,12 +783,15 @@ onBeforeUnmount(() => {
 						:can-link-runs="canLinkRuns"
 						:run-index="inputRun"
 						:linked-runs="linked"
+						:active-node-name="activeNode.name"
 						:current-node-name="inputNodeName"
 						:push-ref="pushRef"
 						:read-only="readOnly || hasForeignCredential"
 						:is-production-execution-preview="isProductionExecutionPreview"
 						:is-pane-active="isInputPaneActive"
 						:display-mode="inputPanelDisplayMode"
+						:is-mapping-onboarded="ndvStore.isMappingOnboarded"
+						:focused-mappable-input="ndvStore.focusedMappableInput"
 						@activate-pane="activateInputPane"
 						@link-run="onLinkRunToInput"
 						@unlink-run="() => onUnlinkRun('input')"
